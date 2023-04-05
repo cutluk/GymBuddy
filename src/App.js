@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+/*import React, { useState } from 'react'
 import './App.css'
 import Switch from 'react-ios-switch'
 
@@ -19,3 +19,26 @@ function App () {
 }
 
 export default App
+*/
+
+import React from 'react';
+import { Routes } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import Login from './examples/Login';
+import Signup from './examples/Signup';
+import ProtectedRoute from './auth/ProtectedRoute';
+import Advanced from './examples/Advanced';
+
+const App = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/home" element={<ProtectedRoute/>}>
+        <Route path="" element={<Advanced />} />
+      </Route>
+    </Routes>
+  );
+};
+
+export default App;
