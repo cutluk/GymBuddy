@@ -116,7 +116,7 @@ function Advanced () {
         </h2>
       ) : (
         <h2 className='infoText'>
-          Swipe a card or press a button to get Restore Card button visible!
+          This is our Gym Buddy React App!
         </h2>
       )}
     </div>
