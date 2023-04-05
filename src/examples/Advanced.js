@@ -23,7 +23,7 @@ const db = [
     url: '../../public/img/dinesh.jpg'
   }
 ]
-
+// test change
 function Advanced () {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
