@@ -8,7 +8,7 @@ const db = [
   },
   {
     name: 'Erlich Bachman',
-    url: '.img/erlich.jpg'
+    url: './img/erlich.jpg'
   },
   {
     name: 'Monica Hall',
@@ -16,11 +16,11 @@ const db = [
   },
   {
     name: 'Jared Dunn',
-    url: '.img/jared.jpg'
+    url: './img/jared.jpg'
   },
   {
     name: 'Dinesh Chugtai',
-    url: '.img/dinesh.jpg'
+    url: './img/dinesh.jpg'
   }
 ]
 // test change
@@ -97,7 +97,10 @@ function Advanced () {
             onCardLeftScreen={() => outOfFrame(character.name, index)}
           >
             <div
-              style={{ backgroundImage: 'url(' + character.url + ')' }}
+              style={{ 
+                backgroundImage: 'url(' + character.url + ')',
+                backgroundColor: 'black'
+              }}
               className='card'
             >
               <h3>{character.name}</h3>
