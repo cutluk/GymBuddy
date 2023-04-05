@@ -4,23 +4,23 @@ import TinderCard from 'react-tinder-card'
 const db = [
   {
     name: 'Richard Hendricks',
-    url: '../../public/img/richard.jpg'
+    url: './img/richard.jpg'
   },
   {
     name: 'Erlich Bachman',
-    url: '../../public/img/erlich.jpg'
+    url: '.img/erlich.jpg'
   },
   {
     name: 'Monica Hall',
-    url: '../../public/img/monica.jpg'
+    url: './img/monica.jpg'
   },
   {
     name: 'Jared Dunn',
-    url: '../../public/img/jared.jpg'
+    url: '.img/jared.jpg'
   },
   {
     name: 'Dinesh Chugtai',
-    url: '../../public/img/dinesh.jpg'
+    url: '.img/dinesh.jpg'
   }
 ]
 // test change
