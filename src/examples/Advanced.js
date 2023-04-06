@@ -8,19 +8,19 @@ const db = [
   },
   {
     name: 'Erlich Bachman',
-    url: '/img/erlich.jpg'
+    url: './img/erlich.jpg'
   },
   {
     name: 'Monica Hall',
-    url: '/img/monica.jpg'
+    url: './img/monica.jpg'
   },
   {
     name: 'Jared Dunn',
-    url: '/img/jared.jpg'
+    url: './img/jared.jpg'
   },
   {
     name: 'Dinesh Chugtai',
-    url: './img/richard.jpg'
+    url: './img/dinesh.jpg'
   }
 ]
 // test change
