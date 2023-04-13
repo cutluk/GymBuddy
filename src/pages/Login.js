@@ -24,7 +24,9 @@ const Login = () => {
 
   return (
     <div>
+      {error && <p>User not found. Please Sign Up.</p>}
       <form className="login-form" onSubmit={handleSubmit}>
+        <h1 className='login-title'>Gym Buddy Login</h1>
         <input className="login-input"
           type="email"
           placeholder="Email"
@@ -38,10 +40,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className="login-button" type="submit">Log in</button>
-        <div>Don't have an account?</div>
-        <a href="/signup">Sign up</a>
+        <div className="signupmessage">Don't have an account?</div>
+        <a className="sign-up-button" href="/signup">Sign up</a>
       </form>
-      {error && <p>{error}</p>}
+      
       
 
     </div>
