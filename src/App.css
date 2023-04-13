@@ -109,6 +109,7 @@ h2 {
   color: #fff;
   animation-name: popup;
   animation-duration: 800ms;
+  margin-bottom: -4vw;
 }
 
 .buttons {
