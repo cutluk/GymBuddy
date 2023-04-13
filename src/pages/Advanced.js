@@ -6,31 +6,31 @@ const db = [
     name: 'Richard Hendricks',
     age: 'Age: 21',
     experience: 'Beginner',
-    url: './img/richard.jpg'
+    url: './GymPics/Gym1.jpg'
   },
   {
-    name: 'Erlich Bachman',
+    name: 'Eric Bachman',
     age: 'Age: 26',
     experience: 'Expert',
-    url: './img/erlich.jpg'
+    url: './GymPics/gym2.jpeg'
   },
   {
     name: 'Monica Hall',
     age: 'Age: 23',
     experience: 'Beginner',
-    url: './img/monica.jpg'
+    url: './GymPics/gym3.jpeg'
   },
   {
-    name: 'Jared Dunn',
+    name: 'Kylie Smith',
     age: 'Age: 22',
     experience: 'Intermediate',
-    url: './img/jared.jpg'
+    url: './GymPics/gym4.jpeg'
   },
   {
-    name: 'Dinesh Chugtai',
+    name: 'Josh Scheaffer',
     age: 'Age: 27',
     experience: 'Expert',
-    url: './img/dinesh.jpg'
+    url: './GymPics/gym5.jpeg'
   }
 ]
 
