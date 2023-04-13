@@ -4,26 +4,36 @@ import TinderCard from 'react-tinder-card'
 const db = [
   {
     name: 'Richard Hendricks',
+    age: 'Age: 21',
+    experience: 'Beginner',
     url: './img/richard.jpg'
   },
   {
     name: 'Erlich Bachman',
+    age: 'Age: 26',
+    experience: 'Expert',
     url: './img/erlich.jpg'
   },
   {
     name: 'Monica Hall',
+    age: 'Age: 23',
+    experience: 'Beginner',
     url: './img/monica.jpg'
   },
   {
     name: 'Jared Dunn',
+    age: 'Age: 22',
+    experience: 'Intermediate',
     url: './img/jared.jpg'
   },
   {
     name: 'Dinesh Chugtai',
+    age: 'Age: 27',
+    experience: 'Expert',
     url: './img/dinesh.jpg'
   }
 ]
-// test change
+
 function Advanced () {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
@@ -103,7 +113,17 @@ function Advanced () {
               }}
               className='card'
             >
-              <h3>{character.name}</h3>
+              <h2 className="personinfo">
+                <div>
+                  {character.name}
+                </div>
+                <div>
+                  {character.age}
+                </div>
+                <div>
+                  {character.experience}
+                </div>
+              </h2>
             </div>
           </TinderCard>
         ))}
@@ -119,7 +139,7 @@ function Advanced () {
         </h2>
       ) : (
         <h2 className='infoText'>
-          This is our Gym Buddy React App!
+          Swipe a card or press a button to get started!
         </h2>
       )}
     </div>

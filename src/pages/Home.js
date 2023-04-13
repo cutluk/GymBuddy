@@ -12,7 +12,7 @@ function Home () {
     <div className='app'>
       {showAdvanced ? <Advanced /> : <Simple />}
       <div className='row'>
-        <p style={{ color: '#fff' }}>Show advanced example</p> <Switch checked={showAdvanced} onChange={setShowAdvanced} />
+        <p style={{ color: '#fff' }}>Show Matches</p> <Switch checked={showAdvanced} onChange={setShowAdvanced} />
       </div>
     </div>
   )
