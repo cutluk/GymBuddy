@@ -6,36 +6,36 @@ const db = [
     name: 'Richard Hendricks',
     age: 'Age: 21',
     experience: 'Beginner',
-    contact: 'Contact: 111-111-1111',
-    url: './img/richard.jpg'
+    contact: 'Contact: 123-456-7890',
+    url: './GymPics/Gym1.jpg'
   },
   {
-    name: 'Erlich Bachman',
+    name: 'Eric Bachman',
     age: 'Age: 26',
     experience: 'Expert',
-    contact: 'Contact: 222-222-2222',
-    url: './img/erlich.jpg'
+    contact: 'Contact: 111-111-1111',
+    url: './GymPics/gym2.jpeg'
   },
   {
     name: 'Monica Hall',
     age: 'Age: 23',
     experience: 'Beginner',
-    contact: 'Contact: 333-333-3333',
-    url: './img/monica.jpg'
+    contact: 'Contact: 222-222-2222',
+    url: './GymPics/gym3.jpeg'
   },
   {
-    name: 'Jared Dunn',
+    name: 'Kylie Smith',
     age: 'Age: 22',
     experience: 'Intermediate',
-    contact: 'Contact: 444-444-4444',
-    url: './img/jared.jpg'
+    contact: 'Contact: 333-333-3333',
+    url: './GymPics/gym4.jpeg'
   },
   {
-    name: 'Dinesh Chugtai',
+    name: 'Josh Scheaffer',
     age: 'Age: 27',
     experience: 'Expert',
-    contact: 'Contact: 555-555-5555',
-    url: './img/dinesh.jpg'
+    contact: 'Contact: 444-444-4444',
+    url: './GymPics/gym5.jpeg'
   }
 ]
 
