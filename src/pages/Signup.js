@@ -118,9 +118,8 @@ const Signup = () => {
               type="radio"
               name="exp"
               value="intermediate"
-              checked={gender === "Intermediate"}
+              checked={exp === "intermediate"}
               onChange={(e) => setExp(e.target.value)}
-
             />
             Intermediate
           </label>
