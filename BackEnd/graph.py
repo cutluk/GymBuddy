@@ -9,7 +9,7 @@ class EntirePopulation:
 
 class User:
     # may need to add a picture
-    def __init__(self, first_name, last_name, email, password, gender, age, experience):
+    def __init__(self, first_name, last_name, email, experience, password = "1010", gender = "Male", age = 16):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
