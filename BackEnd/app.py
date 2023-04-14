@@ -12,7 +12,7 @@ pop = EntirePopulation()
 
 
 @app.route('/signup', methods=['POST'])
-@cross_origin
+@cross_origin()
 def signup():
 
     if request.method == 'POST':
