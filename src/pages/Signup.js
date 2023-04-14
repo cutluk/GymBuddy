@@ -8,18 +8,34 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
+ // const [lastName, setLastName] = useState('');
+ // const [age, setAge] = useState('');
+  //const [gender, setGender] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
+      // create user in firebase 
       createUserWithEmailAndPassword(auth, email, password);
+
+      console.log("step1")
+      // send data to backend
+      const response = await fetch('http://localhost:5000/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(firstName),
+      });
+
+      console.log("success")
+      // Send to home page
       setTimeout(() => {
         navigate('/home')
       }, 300)
+
     } catch (error) {
       setError(error.message);
     }
@@ -41,25 +57,42 @@ const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+
         <input className='login-input'
           type="text"
           placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
+        
+       
+        <button className='login-button' type="submit">Sign up</button>
+      </form>
+      {error && <p>{error}</p>}
+    </div>
+  );
+};
+
+export default Signup;
+
+/*
+
+ <input className='login-input'
+          type="text"
+          placeholder="First Name"
+
+        />
         <input className='login-input'
           type="text"
           placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
+  
         />
         <input className='login-input'
           type="number"
           placeholder="Age"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
+     
         />
-        <div className="gender-input">
+        <div className="login-input">
           <label>
             <input
               type="radio"
@@ -77,15 +110,10 @@ const Signup = () => {
               value="female"
               checked={gender === "female"}
               onChange={(e) => setGender(e.target.value)}
+
             />
             Female
           </label>
         </div>
-        <button className='login-button' type="submit">Sign up</button>
-      </form>
-      {error && <p>{error}</p>}
-    </div>
-  );
-};
 
-export default Signup;
+        */
