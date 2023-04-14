@@ -11,6 +11,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
+  const [exp, setExp] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,7 +21,7 @@ const Signup = () => {
       // create user in firebase 
       createUserWithEmailAndPassword(auth, email, password);
 
-      console.log("step1")
+      console.log("Firebase Auth Success, Attempting to send data to backend")
       // send data to backend
       const response = await fetch('http://localhost:5000/signup', {
         method: 'POST',
@@ -30,7 +31,7 @@ const Signup = () => {
         body: JSON.stringify(firstName),
       });
 
-      console.log("success")
+      console.log("Data sent to backend, attempting to navigate to home page")
       // Send to home page
       setTimeout(() => {
         navigate('/home')
@@ -65,7 +66,7 @@ const Signup = () => {
           onChange={(e) => setFirstName(e.target.value)}
         />
 
-<input className='login-input'
+        <input className='login-input'
           type="text"
           placeholder="Last Name"
           value={lastName}
@@ -101,6 +102,39 @@ const Signup = () => {
           </label>
         </div>
         
+        <div className="login-input">
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="beginner"
+              checked={exp === "beginner"}
+              onChange={(e) => setExp(e.target.value)}
+            />
+            Beginner
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="intermediate"
+              checked={gender === "Intermediate"}
+              onChange={(e) => setExp(e.target.value)}
+
+            />
+            Intermediate
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="advanced"
+              checked={exp === "advanced"}
+              onChange={(e) => setExp(e.target.value)}
+              />
+            Advanced
+          </label>
+        </div>
        
         <button className='login-button' type="submit">Sign up</button>
       </form>
