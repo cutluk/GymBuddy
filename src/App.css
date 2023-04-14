@@ -37,7 +37,7 @@
 
 .row>* {
   margin: 5px;
-  margin-top: 5vw;
+  margin-top: 1vw;
 }
 
 h1 {
@@ -109,9 +109,14 @@ h2 {
   color: #fff;
   animation-name: popup;
   animation-duration: 800ms;
-  margin-bottom: -4vw;
+}
+.matchbuttons{
+  margin-top: 3vw;
 }
 
+.ikThisIsBad{
+  margin-bottom: -4vw;
+}
 .buttons {
   margin: 20px;
   display: flex;

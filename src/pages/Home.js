@@ -2,17 +2,18 @@ import React, { useState } from 'react'
 import '../App.css'
 import Switch from 'react-ios-switch'
 
-import Advanced from './Advanced'
-import Simple from './Simple'
+import Group from './Group'
+import Matches from './Matches'
 
 function Home () {
-  const [showAdvanced, setShowAdvanced] = useState(true)
+  const [showGroup, setShowGroup] = useState(true)
 
   return (
     <div className='app'>
-      {showAdvanced ? <Advanced /> : <Simple />}
+      {showGroup ? <Group /> : <Matches />}
       <div className='row'>
-        <p style={{ color: '#fff' }}>Show Matches</p> <Switch checked={showAdvanced} onChange={setShowAdvanced} />
+        <p style={{ color: '#fff' }}>Show Matches</p> 
+        <Switch checked={!showGroup} onChange={() => setShowGroup(!showGroup)} />
       </div>
     </div>
   )
