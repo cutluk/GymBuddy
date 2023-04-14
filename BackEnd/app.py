@@ -1,13 +1,21 @@
 from flask import Flask, request, jsonify
 from graph import User, Cluster, EntirePopulation
+from flask_cors import CORS, cross_origin
+
+
+
 
 app = Flask(__name__)
+cors = CORS(app)
 
 cluster = Cluster("Default Cluster")
 pop = EntirePopulation()
 
+
 @app.route('/signup', methods=['POST'])
+@cross_origin
 def signup():
+
     if request.method == 'POST':
         data = request.get_json()
         first_name = data['first_name']
