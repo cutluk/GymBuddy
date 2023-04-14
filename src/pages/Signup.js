@@ -37,6 +37,19 @@ const Signup = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        <input className='login-input'
+          type="First Name"
+          placeholder="First Name"
+          />
+        <input className='login-input'
+          type="Last Name"
+          placeholder="Last Name"
+        />
+        <input className='login-input'
+          type="age"
+          placeholder="Age"
+          />
+
         <button className='login-button' type="submit">Sign up</button>
       </form>
       {error && <p>{error}</p>}
