@@ -7,6 +7,10 @@ const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [age, setAge] = useState('');
+  const [gender, setGender] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -20,7 +24,6 @@ const Signup = () => {
       setError(error.message);
     }
   };
-  // test
 
   return (
     <div>
@@ -39,18 +42,45 @@ const Signup = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <input className='login-input'
-          type="First Name"
+          type="text"
           placeholder="First Name"
-          />
-        <input className='login-input'
-          type="Last Name"
-          placeholder="Last Name"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
         />
         <input className='login-input'
-          type="age"
+          type="text"
+          placeholder="Last Name"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
+        <input className='login-input'
+          type="number"
           placeholder="Age"
-          />
-
+          value={age}
+          onChange={(e) => setAge(e.target.value)}
+        />
+        <div className="gender-input">
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              checked={gender === "male"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Male
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              checked={gender === "female"}
+              onChange={(e) => setGender(e.target.value)}
+            />
+            Female
+          </label>
+        </div>
         <button className='login-button' type="submit">Sign up</button>
       </form>
       {error && <p>{error}</p>}
