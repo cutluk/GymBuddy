@@ -25,6 +25,7 @@ const Signup = () => {
       // send data to backend
       const response = await fetch('http://localhost:5000/signup', {
         method: 'POST',
+        mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
