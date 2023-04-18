@@ -3,7 +3,7 @@ from graph import User, Cluster, EntirePopulation
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/**": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
