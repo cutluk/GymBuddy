@@ -23,13 +23,20 @@ const Signup = () => {
 
       console.log("Firebase Auth Success, Attempting to send data to backend")
       // send data to backend
-      const response = await fetch('http://localhost:5000/signup', {
+      const response = await fetch('http://127.0.0.1:5000/signup', {
         method: 'POST',
-        mode: 'cors',
+        mode: 'cors', // no-cors, *cors, same-origin
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(firstName),
+        body: JSON.stringify({first_name:firstName,
+                              last_name:lastName,
+                              email:email,
+                              password:password,
+                              age:age,
+                              gender:gender,
+                              experience:exp,
+                            }),
       });
 
       console.log("Data sent to backend, attempting to navigate to home page")
@@ -104,38 +111,12 @@ const Signup = () => {
           </label>
         </div>
         
-        <div className="login-input">
-          <label>
-            <input
-              type="radio"
-              name="exp"
-              value="beginner"
-              checked={exp === "beginner"}
-              onChange={(e) => setExp(e.target.value)}
-            />
-            Beginner
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="exp"
-              value="intermediate"
-              checked={exp === "intermediate"}
-              onChange={(e) => setExp(e.target.value)}
-            />
-            Intermediate
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="exp"
-              value="advanced"
-              checked={exp === "advanced"}
-              onChange={(e) => setExp(e.target.value)}
-              />
-            Advanced
-          </label>
-        </div>
+        <input className='login-input'
+          type="number"
+          placeholder="Your Experience (1-10)"
+          value={exp}
+          onChange={(e) => setExp(e.target.value)}
+        />
        
         <button className='login-button' type="submit">Sign up</button>
       </form>

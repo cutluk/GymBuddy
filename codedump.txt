@@ -1,0 +1,32 @@
+<div className="login-input">
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="beginner"
+              checked={exp === "beginner"}
+              onChange={(e) => setExp(e.target.value)}
+            />
+            Beginner
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="intermediate"
+              checked={exp === "intermediate"}
+              onChange={(e) => setExp(e.target.value)}
+            />
+            Intermediate
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="exp"
+              value="advanced"
+              checked={exp === "advanced"}
+              onChange={(e) => setExp(e.target.value)}
+              />
+            Advanced
+          </label>
+        </div>
