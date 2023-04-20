@@ -15,7 +15,6 @@ pop = EntirePopulation()
 def signup():
 
     if request.method == 'POST':
-        print("You made it here")
         data = request.get_json()
         first_name = data['first_name']
         last_name = data['last_name']
@@ -25,9 +24,9 @@ def signup():
         age = int(data['age'])
         experience = int(data['experience'])
 
-        user = User(first_name, last_name, email, password, gender, age, experience)
+        user = User(first_name = first_name, last_name = last_name, email = email, password = password, gender = gender, age = age, experience = experience)
         cluster.cluster_id = user.cluster_id
-        pop[cluster.cluster_id] = cluster
+        pop.clusters[cluster.cluster_id] = cluster
         try: 
             cluster.add_user(user)
         except Exception as e:

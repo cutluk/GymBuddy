@@ -29,16 +29,20 @@ const Signup = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({first_name:firstName,
-                              last_name:lastName,
-                              email:email,
+        body: JSON.stringify({email:email,
                               password:password,
+                              first_name:firstName,
+                              last_name:lastName,
                               age:age,
                               gender:gender,
                               experience:exp,
                             }),
       });
 
+      // return cluster of users
+      const data = await response.json();
+      console.log(data);
+      
       console.log("Data sent to backend, attempting to navigate to home page")
       
       // Send to home page
