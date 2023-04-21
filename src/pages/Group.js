@@ -41,7 +41,7 @@ function Group () {
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
   const fetchHandler = async () => {
-    const response = await fetch('http://localhost:5000/data', {
+    const response = await fetch('http://localhost:3001/data', {
       method: 'GET',
       mode: 'cors',
       headers: {

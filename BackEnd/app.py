@@ -52,6 +52,7 @@ def get_data():
         data = {'name': 'John', 'age': 30, 'experience': 'beginner'}
         print("Hello")
         return jsonify(data)
+        
     elif request.method == 'OPTIONS':
         print("Hello")
         resp = Response("Yep, this is options")
@@ -63,4 +64,4 @@ def get_data():
    
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=3001)
