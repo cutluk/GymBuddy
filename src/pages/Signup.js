@@ -42,7 +42,7 @@ const Signup = () => {
       // return cluster of users
       const data = await response.json();
       console.log(data);
-      
+
       console.log("Data sent to backend, attempting to navigate to home page")
       
       // Send to home page
@@ -131,45 +131,3 @@ const Signup = () => {
 
 export default Signup;
 
-/*
-
- <input className='login-input'
-          type="text"
-          placeholder="First Name"
-
-        />
-        <input className='login-input'
-          type="text"
-          placeholder="Last Name"
-  
-        />
-        <input className='login-input'
-          type="number"
-          placeholder="Age"
-     
-        />
-        <div className="login-input">
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="male"
-              checked={gender === "male"}
-              onChange={(e) => setGender(e.target.value)}
-            />
-            Male
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="gender"
-              value="female"
-              checked={gender === "female"}
-              onChange={(e) => setGender(e.target.value)}
-
-            />
-            Female
-          </label>
-        </div>
-
-        */

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import TinderCard from 'react-tinder-card'
 
 const db = [
@@ -37,8 +37,15 @@ const db = [
 function Group () {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
+  const [data, setData] = useState({});
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
+
+  useEffect(() => {
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => setData(data));
+  }, []);
 
   const childRefs = useMemo(
     () =>
