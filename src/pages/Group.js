@@ -40,11 +40,19 @@ function Group () {
   const [data, setData] = useState({});
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
-
-  useEffect(() => {
-    fetch('/data')
+  const fetchHandler = async () => {
+    const response = await fetch('http://localhost:5000/data', {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
       .then(response => response.json())
       .then(data => setData(data));
+   }
+  useEffect(() => {
+    fetchHandler();
   }, []);
 
   const childRefs = useMemo(
@@ -104,6 +112,11 @@ function Group () {
         rel='stylesheet'
       />
       <h1>Gym Buddy 💪</h1>
+      <div>
+      <p>Name: {data.name}</p>
+      <p>Age: {data.age}</p>
+      <p>Exp: {data.experience}</p>
+    </div>
       <div className='cardContainer'>
         {db.map((character, index) => (
           <TinderCard

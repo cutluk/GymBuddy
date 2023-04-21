@@ -11,6 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cluster = Cluster("Default Cluster")
 pop = EntirePopulation()
 
+
 @app.route('/signup', methods=['POST', 'OPTIONS'])
 def signup():
 
@@ -43,6 +44,23 @@ def signup():
         resp.status_code = 200
         return resp
 
+
+
+@app.route('/data', methods=['GET', 'OPTIONS'])
+def get_data():
+    if request.method == 'GET':
+        data = {'name': 'John', 'age': 30, 'experience': 'beginner'}
+        print("Hello")
+        return jsonify(data)
+    elif request.method == 'OPTIONS':
+        print("Hello")
+        resp = Response("Yep, this is options")
+        resp.headers['Access-Control-Allow-Headers'] = "Authorization, Content-Type"
+        resp.headers['Access-Control-Allow-Methods']= "GET, POST"
+        resp.headers['Access-Control-Allow-Origin'] = "*"
+        resp.status_code = 200
+        return resp
+   
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

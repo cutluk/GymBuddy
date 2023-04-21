@@ -40,8 +40,8 @@ const Signup = () => {
       });
 
       // return cluster of users
-      const data = await response.json();
-      console.log(data);
+     //  const data = await response.json();
+     //  console.log(data);
 
       console.log("Data sent to backend, attempting to navigate to home page")
       
