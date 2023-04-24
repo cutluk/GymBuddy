@@ -41,7 +41,7 @@ const db = [
 ]
 
 function Matches () {
-  const [currentIndex, setCurrentIndex] = useState(db.length - 1)
+  const [currentIndex, setCurrentIndex] = useState(null)
   const [lastDirection, setLastDirection] = useState()
   const [data, setData] = useState([{}]);
   // used for outOfFrame closure
@@ -54,16 +54,20 @@ function Matches () {
         'Content-Type': 'application/json',
       },
     })
+ 
       .then(response => response.json())
-      .then(data => setData(data));
+      .then(data => setData(data))
+      console.log(data.length)
+      .then(data => setCurrentIndex(data.length - 1));
    }
   useEffect(() => {
     fetchHandler();
   }, []);
 
+ 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(data.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -74,7 +78,7 @@ function Matches () {
     currentIndexRef.current = val
   }
 
-  const canGoBack = currentIndex < db.length - 1
+  const canGoBack = currentIndex < data.length - 1
 
   const canSwipe = currentIndex >= 0
 
@@ -94,7 +98,7 @@ function Matches () {
   }
 
   const swipe = async (dir) => {
-    if (canSwipe && currentIndex < db.length) {
+    if (canSwipe && currentIndex < data.length) {
       await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
     }
   }
@@ -160,7 +164,7 @@ function Matches () {
         </div>
         {lastDirection ? (
         <h2 key={lastDirection} className='infoText'>
-          You swiped {lastDirection}
+          You swiped {lastDirection} {currentIndex}
         </h2>
       ) : (
         <h2 className='infoText'>
