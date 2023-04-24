@@ -6,7 +6,7 @@ const db = [
     name: 'Richard Hendricks',
     age: 'Age: 21',
     experience: 'Beginner',
-    url: './GymPics/Gym1.jpg'
+    url: './GymPics/gym1.jpeg'
   },
   {
     name: 'Eric Bachman',
@@ -37,7 +37,7 @@ const db = [
 function Group () {
   const [currentIndex, setCurrentIndex] = useState(db.length - 1)
   const [lastDirection, setLastDirection] = useState()
-  const [data, setData] = useState({});
+  const [data, setData] = useState([{}]);
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
   const fetchHandler = async () => {
@@ -113,12 +113,10 @@ function Group () {
       />
       <h1>Gym Buddy 💪</h1>
       <div>
-      <p>Name: {data.name}</p>
-      <p>Age: {data.age}</p>
-      <p>Exp: {data.experience}</p>
+     
     </div>
       <div className='cardContainer'>
-        {db.map((character, index) => (
+        {data.map((character, index) => (
           <TinderCard
             ref={childRefs[index]}
             className='swipe'
@@ -138,10 +136,10 @@ function Group () {
                   {character.name}
                 </div>
                 <div>
-                  {character.age}
+                  Age: {character.age}
                 </div>
                 <div>
-                  {character.experience}
+                  Exp: {character.experience}
                 </div>
               </h2>
             </div>

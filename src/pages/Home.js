@@ -10,10 +10,9 @@ function Home () {
 
   return (
     <div className='app'>
-      {showGroup ? <Group /> : <Matches />}
+       <Matches />
       <div className='row'>
-        <p style={{ color: '#fff' }}>Show Matches</p> 
-        <Switch checked={!showGroup} onChange={() => setShowGroup(!showGroup)} />
+        
       </div>
     </div>
   )
