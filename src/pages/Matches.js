@@ -8,12 +8,13 @@ function Matches () {
   const [currentIndex, setCurrentIndex] = useState(null)
   const [lastDirection, setLastDirection] = useState()
   const [data, setData] = useState([{}]);
-  const [stats, setStats] = useState([{}]);
+  const [stats, setStats] = useState('');
   
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
   const fetchHandler = async () => {
-    const response = await fetch('http://localhost:3001/data', {
+    // https://gymbuddy.server.lukecutting.com/data
+    const response = await fetch('http://localhost:3081/data', {
       method: 'GET',
       mode: 'cors',
       headers: {
@@ -89,7 +90,7 @@ function Matches () {
         rel='stylesheet'
       />
       <h1>🔥 Your Matches 🔥</h1>
-      <h3 className='statsInfo'>There are {stats.length} people better than you 😈</h3>
+      <h3 className='statsInfo'>{stats} 😈</h3>
       <div className='cardContainer'>
         {data.map((character, index) => (
           <TinderCard

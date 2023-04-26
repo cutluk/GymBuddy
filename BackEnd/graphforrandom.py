@@ -56,7 +56,7 @@ class EntirePopulation:
     def add_cluster(self, cluster):
         self.clusters[cluster.cluster_id] = cluster
         
-    def generate_population(self, population_size  = 900):
+    def generate_population(self, population_size  = 1000):
         for i in range(population_size):
             random_user = self.generate_random_user() 
             current_cluster_id = random_user.cluster_id
