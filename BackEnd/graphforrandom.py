@@ -1,4 +1,5 @@
 import random
+from collections import deque
 import string
 import glob
 # create a class for each node 
@@ -9,6 +10,48 @@ class EntirePopulation:
         self.clusters = {}
         self.used_emails = []
         self.used_numbers = []
+    def get_competition(self, gender, user_age, cluster_above):
+        graph_above = self.clusters[cluster_above].graph.edges
+
+        start_node = self.clusters[cluster_above].graph.nodes
+
+        if gender == "Male":
+            comp_count = self.bfs(user_age, graph_above, start_node)
+            return "There are {comp_count} people better".format(comp_count = comp_count)
+        else:
+            comp_count = self.dfs(user_age, graph_above, start_node)
+            return "There are {comp_count} people better".format(comp_count = comp_count)
+
+
+    def bfs(self, user_age, graph_above, start_node):
+        sum_people = 0
+        visited = set()
+        queue = deque(start_node)
+
+        while queue:
+            node = queue.popleft()
+            if node not in visited and node.age == user_age:
+                visited.add(node)
+                sum_people += 1
+                for neighbor in graph_above[node]:
+                    queue.append(neighbor)
+
+        return sum_people
+
+    def dfs(self, user_age, cluster_above, start_node):
+        sum_people = 0
+        visited = set()
+        stack = [start_node.pop()]
+
+        while stack:
+            node = stack.pop()
+            if node not in visited and node.age == user_age:
+                visited.add(node)
+                sum_people += 1
+                for neighbor in cluster_above[node]:
+                    stack.append(neighbor)
+
+        return sum_people
 
     def add_cluster(self, cluster):
         self.clusters[cluster.cluster_id] = cluster
@@ -28,12 +71,6 @@ class EntirePopulation:
                 self.clusters[current_cluster_id].add_user(random_user)
             # so now there should be a cluster assigned to an id in the entire population
             # we should add the random user to the graph inside of their cluster
-        # for k, v in self.clusters.items():
-        #     if random_user.cluster_id == k:
-        #         print("Cluster Name: ", k)
-        #         print("Users inside of ur cluster: ", [(user.first_name, user.phone_number) for user in v.users], "\n") 
-                
-
 
     # Function to generate a random user with first and last names from predefined lists
     def generate_random_user(self):
@@ -68,8 +105,8 @@ class EntirePopulation:
             email = f"{first_name[0]}{last_name}{random.randint(1, 9999)}@{random.choice(email_platforms)}"
 
             # Check if the generated email is already used
-            if email not in used_emails:
-                used_emails.append(email)
+            if email not in self.used_emails:
+                self.used_emails.append(email)
                 break  # Break out of the loop if the email is unique
 
         while True:
@@ -77,8 +114,8 @@ class EntirePopulation:
             phone_number = "{}{}{}-{}{}{}-{}{}{}{}".format(*digits)
 
 
-            if phone_number not in used_numbers:
-                used_numbers.append(phone_number)
+            if phone_number not in self.used_numbers:
+                self.used_numbers.append(phone_number)
                 break  
 
 
@@ -157,7 +194,6 @@ class Graph:
 
             if curr_node not in visited:
                 visited.add(curr_node)
-                print(curr_node.first_name)
 
                 if curr_node in self.edges:
                     for neighbor in self.edges[curr_node]:
@@ -245,70 +281,7 @@ class User:
 
                 elif experience > 6:
                     return "Male Advanced Old"
-
-used_emails = []
-used_numbers = []
-# Function to generate a random user with first and last names from predefined lists
-def generate_random_user():
-    with open('Female_Names.txt', 'r') as file:
-        first_names_female = [line.strip() for line in file]
-
-    with open('Male_Names.txt', 'r') as file:
-        first_names_male = [line.strip() for line in file]
-
-    with open('Last_Names.txt', 'r') as file:
-        last_names = [line.strip() for line in file]
-    
-    email_platforms = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com']
-
-    gender_options = ('Female', 'Male')
-
-    # Choose a random gender
-    gender = random.choice(gender_options)
-
-    # Choose a random first name based on the gender
-    if gender == 'Male':
-        first_name = random.choice(first_names_male)
-    else:
-        first_name = random.choice(first_names_female)
-
-    # Choose a random last name
-    last_name = random.choice(last_names)
-
-    # Generate email, password, age, and experience
-    while True:
-        # Generate email, password, age, and experience
-        email = f"{first_name[0]}{last_name}{random.randint(1, 9999)}@{random.choice(email_platforms)}"
-
-        # Check if the generated email is already used
-        if email not in used_emails:
-            used_emails.append(email)
-            break  # Break out of the loop if the email is unique
-
-    while True:
-        digits = [random.randint(1, 9) for _ in range(10)]
-        phone_number = "{}{}{}-{}{}{}-{}{}{}{}".format(*digits)
-
-
-        if phone_number not in used_numbers:
-            used_numbers.append(phone_number)
-            break  
-    
-
-
-
-    password = ''.join(random.choice(string.ascii_letters) for _ in range(8))
-    age = random.randint(18, 69)
-    experience = random.randint(1, 10)
-    # get picture for each user
-    glob_path = glob("./face_age/0{i}/*".format(i = age))
-    glob_size = len(glob_path)
-    pic_url = glob_path[random.randint(0, glob_size - 1)]
-    
-
-    # Create and return a User object
-    return User(first_name, last_name, email, password, gender, age, experience, pic_url)
-        
+  
 
 # function for logging in 
 def initialize_app(population_size = 200):

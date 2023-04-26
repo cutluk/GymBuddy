@@ -52,7 +52,7 @@ def signup():
 def get_data():
     if request.method == 'GET':
         data = pop.get_users_from_cluster("Female Beginner Middle Aged")
-        stats = pop.get_users_from_cluster("Female Intermediate Middle Aged")
+        stats = pop.get_competition("Male", 22,"Male Intermediate Young")
         response = {
             "data": data,
             "stats": stats
