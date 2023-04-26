@@ -51,12 +51,13 @@ def signup():
 @app.route('/data', methods=['GET', 'OPTIONS'])
 def get_data():
     if request.method == 'GET':
-        data = pop.get_users_from_cluster("Female Beginner Young")
-        # data = [
-        #     {'name': 'John', 'age': 30, 'experience': 'beginner', 'url': 'https://media.istockphoto.com/id/1346125184/photo/group-of-successful-multiethnic-business-team.jpg?s=612x612&w=0&k=20&c=5FHgRQZSZed536rHji6w8o5Hco9JVMRe8bpgTa69hE8='},
-        #        {'name': 'Eric Bachman', 'age': 26, 'experience': 'expert', 'url': 'https://dashofwellness.com/wp-content/uploads/2020/10/word-image-31.png'}]
-        # print("Hello")
-        return jsonify(data)
+        data = pop.get_users_from_cluster("Female Beginner Middle Aged")
+        stats = pop.get_users_from_cluster("Female Intermediate Middle Aged")
+        response = {
+            "data": data,
+            "stats": stats
+        }
+        return jsonify(response)
         
     elif request.method == 'OPTIONS':
         print("Hello")

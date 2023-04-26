@@ -8,7 +8,8 @@ function Matches () {
   const [currentIndex, setCurrentIndex] = useState(null)
   const [lastDirection, setLastDirection] = useState()
   const [data, setData] = useState([{}]);
-  const [search, setSearch] = useState('');
+  const [stats, setStats] = useState([{}]);
+  
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
   const fetchHandler = async () => {
@@ -19,10 +20,11 @@ function Matches () {
         'Content-Type': 'application/json',
       },
     })
-      const fetchedData = await response.json();
-      setData(fetchedData);
-      setCurrentIndex(fetchedData.length - 1);
-      console.log('data size: ' + fetchedData.length);
+      const { data, stats } = await response.json();
+      setData(data);
+      setStats(stats);
+      setCurrentIndex(data.length - 1);
+      console.log('data size: ' + data.length);
    }
   useEffect(() => {
     fetchHandler();
@@ -86,8 +88,8 @@ function Matches () {
         href='https://fonts.googleapis.com/css?family=Alatsi&display=swap'
         rel='stylesheet'
       />
-      <h1>Your Matches</h1>
-      
+      <h1>🔥 Your Matches 🔥</h1>
+      <h3 className='statsInfo'>There are {stats.length} people better than you 😈</h3>
       <div className='cardContainer'>
         {data.map((character, index) => (
           <TinderCard

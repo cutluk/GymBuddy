@@ -54,6 +54,11 @@ h2 {
   position: absolute;
 }
 
+.statsInfo{
+  margin-top: -.8vw;
+  color: white;
+}
+
 .cardContainer {
   width: 90vw;
   max-width: 380px;
@@ -103,6 +108,7 @@ h2 {
 }
 
 .infoText {
+  margin-top: -.8vw;
   width: 100%;
   justify-content: center;
   display: flex;
