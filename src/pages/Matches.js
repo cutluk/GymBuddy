@@ -2,48 +2,13 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
 import TinderCard from 'react-tinder-card'
 
-const db = [
-  {
-    name: 'Richard Hendricks',
-    age: 'Age: 21',
-    experience: 'Beginner',
-    contact: 'Contact: 123-456-7890',
-    url: './GymPics/Gym1.jpg'
-  },
-  {
-    name: 'Eric Bachman',
-    age: 'Age: 26',
-    experience: 'Expert',
-    contact: 'Contact: 111-111-1111',
-    url: './GymPics/gym2.jpeg'
-  },
-  {
-    name: 'Monica Hall',
-    age: 'Age: 23',
-    experience: 'Beginner',
-    contact: 'Contact: 222-222-2222',
-    url: './GymPics/gym3.jpeg'
-  },
-  {
-    name: 'Kylie Smith',
-    age: 'Age: 22',
-    experience: 'Intermediate',
-    contact: 'Contact: 333-333-3333',
-    url: './GymPics/gym4.jpeg'
-  },
-  {
-    name: 'Josh Scheaffer',
-    age: 'Age: 27',
-    experience: 'Expert',
-    contact: 'Contact: 444-444-4444',
-    url: './GymPics/gym5.jpeg'
-  }
-]
+
 
 function Matches () {
   const [currentIndex, setCurrentIndex] = useState(null)
   const [lastDirection, setLastDirection] = useState()
   const [data, setData] = useState([{}]);
+  const [search, setSearch] = useState('');
   // used for outOfFrame closure
   const currentIndexRef = useRef(currentIndex)
   const fetchHandler = async () => {
@@ -54,33 +19,29 @@ function Matches () {
         'Content-Type': 'application/json',
       },
     })
- 
-      .then(response => response.json())
-      .then(data => setData(data))
-      console.log(data.length)
-      .then(data => setCurrentIndex(data.length - 1));
+      const fetchedData = await response.json();
+      setData(fetchedData);
+      setCurrentIndex(fetchedData.length - 1);
+      console.log('data size: ' + fetchedData.length);
    }
   useEffect(() => {
     fetchHandler();
   }, []);
 
  
-  const childRefs = useMemo(
-    () =>
-      Array(data.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  )
+  const childRefs = useMemo(() =>
+   // Array(data.length).fill(0).map(i => React.createRef()), [data.length]
+    Array.from({ length: data.length }, () => React.createRef()), [data.length]);
+   
 
   const updateCurrentIndex = (val) => {
     setCurrentIndex(val)
     currentIndexRef.current = val
   }
 
-  const canGoBack = currentIndex < data.length - 1
+  const canGoBack = currentIndex < data.length - 1;
 
-  const canSwipe = currentIndex >= 0
+  const canSwipe = currentIndex >= 0;
 
   // set last direction and decrease current index
   const swiped = (direction, nameToDelete, index) => {
@@ -98,6 +59,10 @@ function Matches () {
   }
 
   const swipe = async (dir) => {
+    console.log("childrefs, currentindex, data length")
+    console.log(childRefs)
+    console.log(currentIndex)
+    console.log(data.length)
     if (canSwipe && currentIndex < data.length) {
       await childRefs[currentIndex].current.swipe(dir) // Swipe the card!
     }
@@ -122,6 +87,7 @@ function Matches () {
         rel='stylesheet'
       />
       <h1>Your Matches</h1>
+      
       <div className='cardContainer'>
         {data.map((character, index) => (
           <TinderCard
@@ -164,7 +130,7 @@ function Matches () {
         </div>
         {lastDirection ? (
         <h2 key={lastDirection} className='infoText'>
-          You swiped {lastDirection} {currentIndex}
+          You have {currentIndex +1} matches left!
         </h2>
       ) : (
         <h2 className='infoText'>
