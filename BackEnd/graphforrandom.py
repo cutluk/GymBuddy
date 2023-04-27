@@ -2,9 +2,8 @@ import random
 from collections import deque
 import string
 import glob
+
 # create a class for each node 
-# create a class for each node 
-#
 class EntirePopulation:
     def __init__(self):
         self.clusters = {}
@@ -21,8 +20,8 @@ class EntirePopulation:
         else:
             comp_count = self.dfs(user_age, graph_above, start_node)
             return "There are {comp_count} people better".format(comp_count = comp_count)
-
-
+        
+    
     def bfs(self, user_age, graph_above, start_node):
         sum_people = 0
         visited = set()
@@ -119,7 +118,6 @@ class EntirePopulation:
                 break  
 
 
-
         password = ''.join(random.choice(string.ascii_letters) for _ in range(8))
         age = random.randint(18, 69)
         experience = random.randint(1, 10)
@@ -149,8 +147,6 @@ class EntirePopulation:
     
 # cluster will have ID and a list of users
 # calling something like cluster.users will provide a list of users in the cluster
-# cluster will have ID and a list of users
-# calling something like cluster.users will provide a list of users in the cluster
 class Cluster:
     def __init__(self, cluster_id):
         self.cluster_id = cluster_id
@@ -174,7 +170,6 @@ class Graph:
     def add_node(self, node):
         self.nodes.add(node)
 
-    # well have figure out when to call this function 
     # take the most recent user from the nodes set and use that node as the "from" and then a new user as the "to"
     def add_edge(self, from_node, to_node):
         if from_node not in self.edges:
@@ -204,7 +199,6 @@ class Graph:
         
 
 class User:
-    # may need to add a picture
     def __init__(self, first_name, last_name, phone_number, email, password, gender, age, pic_url, experience):
         self.first_name = first_name
         self.last_name = last_name
@@ -216,12 +210,6 @@ class User:
         self.pic_url = pic_url
         self.experience = experience 
         self.cluster_id = self.generateClusterID(gender, age, experience)
-
-        # def generate_random_email(self, first_name, last_name):
-        #     email_platforms = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com']
-        #     random_number = random.randint(1, 999)
-        #     email = f"{first_name[0]}{last_name}{random_number}@{random.choice(email_platforms)}"
-        #     return email
     
     def generateClusterID(self, gender, age, experience):
         if(gender == "Female"):
@@ -321,51 +309,6 @@ def main():
 
     user_list =  pop.get_users_from_cluster(cluster_id= current_user.cluster_id)
     print(user_list)
-
-   
-    # random_users = []
-    # for i in range(20):
-    #     user = generate_random_user()
-    #     random_users.append(user)
-    #     userNum += 1
-
-    # #Print information of the random users
-    # for user in random_users:
-    #     print("First Name:", user.first_name)
-    #     print("Last Name:", user.last_name)
-    #     print("Email:", user.email)
-    #     print("Password:", user.password)
-    #     print("Gender:", user.gender)
-    #     print("Age:", user.age)
-    #     print("Experience:", user.experience)
-    #     print("Cluster ID:", user.cluster_id)
-    #     print("-----")
-
-    # print ("Number of users:", userNum)
-    # print (" ")
-
-    # target_cluster = "Female Advanced Old"  # Change to your desired target cluster
-    # print("People in cluster '{}':".format(target_cluster))
-    # print("---------------")
-    # for user in random_users:
-    #     if user.cluster_id == target_cluster:
-    #         print("Name: {} {}".format(user.first_name, user.last_name))
-    #         print("Email: {}".format(user.email))
-    #         print("---------------")
-
-
-    # print (" ")
-    # print ("---------------------- NEW CLUSTER ----------------------")
-    # print (" ")
-
-    # target_cluster = "Male Advanced Old"  # Change to your desired target cluster
-    # print("People in cluster '{}':".format(target_cluster))
-    # print("---------------")
-    # for user in random_users:
-    #     if user.cluster_id == target_cluster:
-    #         print("Name: {} {}".format(user.first_name, user.last_name))
-    #         print("Email: {}".format(user.email))
-    #         print("---------------")
 
 if __name__ == "__main__":
     main()
