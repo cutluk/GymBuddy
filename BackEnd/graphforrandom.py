@@ -9,20 +9,23 @@ class EntirePopulation:
         self.clusters = {}
         self.used_emails = []
         self.used_numbers = []
+
     def get_competition(self, gender, user_age, cluster_above):
+        start_dfs = None
         graph_above = self.clusters[cluster_above].graph.edges
 
-        start_node = self.clusters[cluster_above].graph.nodes
-
+        start_node_bfs = self.clusters[cluster_above].graph.nodes
+        dfs_graph = self.clusters[cluster_above].graph.edges
+        for (k,v) in dfs_graph.items():
+            start_dfs = k
         if gender == "Male":
-            comp_count = self.bfs(user_age, graph_above, start_node)
+            comp_count = self.bfs(user_age, graph_above, start_node_bfs)
             return "There are {comp_count} people better".format(comp_count = comp_count)
         else:
-            comp_count = self.dfs(user_age, graph_above, start_node)
-            return "There are {comp_count} people better".format(comp_count = comp_count)
-        
-    # Breadth-First Search (BFS) algorithm 
-    # Searches the cluster above a user and returns the sum of people the same age with higher experience
+            comp_count = self.dfs(user_age, graph_above, start_dfs)
+       
+            return "There are {comp_count} people better".format(comp_count = comp_count)  
+    
     def bfs(self, user_age, graph_above, start_node):
         sum_people = 0
         visited = set()
@@ -31,48 +34,65 @@ class EntirePopulation:
         while queue:
             node = queue.popleft()
             if node not in visited and node.age == user_age:
+                print("User: ", node.first_name, " age: ", node.age)
                 visited.add(node)
                 sum_people += 1
                 for neighbor in graph_above[node]:
                     queue.append(neighbor)
 
         return sum_people
-    
-    # Depth-First Search (DFS) algorithm 
-    # Searches the cluster above a user and returns the sum of people the same age with higher experience
+ 
     def dfs(self, user_age, cluster_above, start_node):
         sum_people = 0
         visited = set()
-        stack = [start_node.pop()]
+ 
+        stack = [start_node]
 
         while stack:
             node = stack.pop()
-            if node not in visited and node.age == user_age:
+
+            if node not in visited:
                 visited.add(node)
-                sum_people += 1
+                if node.age == user_age:
+                    sum_people += 1
                 for neighbor in cluster_above[node]:
                     stack.append(neighbor)
+            else:
+                if node.age == user_age:
+                    sum_people += 1
+
 
         return sum_people
+
 
     def add_cluster(self, cluster):
         self.clusters[cluster.cluster_id] = cluster
         
-    def generate_population(self, population_size  = 1000):
+    def generate_population(self, population_size  = 15000):
+
         for i in range(population_size):
             random_user = self.generate_random_user() 
             current_cluster_id = random_user.cluster_id
+           
             current_cluster = Cluster(current_cluster_id)
+        
+            user_list_length = len(current_cluster.users) - 1
+            if user_list_length > 1:
+                rand_index = random.randint(0, user_list_length)
+            else:
+                rand_index = -1
+            # so now there should be a cluster assigned to an id in the entire population
+            # we should add the random user to the graph inside of their cluster
+            
             # if the cluster id doesnt exist yet in the population, create it and add a cluster to that
             if current_cluster_id not in self.clusters:
                 
                 self.add_cluster(current_cluster)
                 self.clusters[current_cluster_id].add_user(random_user)
             else:
-                self.clusters[current_cluster_id].connect_users(self.clusters[current_cluster_id].users[-1], random_user)
+                self.clusters[current_cluster_id].connect_users(self.clusters[current_cluster_id].users[rand_index], random_user)
                 self.clusters[current_cluster_id].add_user(random_user)
-            # so now there should be a cluster assigned to an id in the entire population
-            # we should add the random user to the graph inside of their cluster
+
 
     # Function to generate a random user with first and last names from name text files
     def generate_random_user(self):
@@ -178,23 +198,6 @@ class Graph:
         if to_node not in self.edges:
             self.edges[to_node] = []
         self.edges[to_node].append(from_node)
-    
-    def dfs(self, node):
-        visited = set()
-        stack = [node]
-
-        while stack:
-            curr_node = stack.pop()
-
-            if curr_node not in visited:
-                visited.add(curr_node)
-
-                if curr_node in self.edges:
-                    for neighbor in self.edges[curr_node]:
-                        if neighbor not in visited:
-                            stack.append(neighbor)
-
-        print("Edges:", self.edges)
         
 
 class User:
@@ -289,14 +292,8 @@ def initialize_app(population_size = 200):
     print("Congrats {name}! You are ready to meet other users!".format(name = newest_user.first_name))
     return newest_user
 
-def main_menu():
-    print("Successfully added you to a cluster of Gym Buddies!")
-    print("Select an option below: ")
-    option = input("1. Find users with closest age")
-    option  = input("2. Search for users by name")
 
 def main():
-    userNum = 0
     pop = EntirePopulation()
     pop.generate_population()
     
@@ -308,6 +305,9 @@ def main():
 
     user_list =  pop.get_users_from_cluster(cluster_id= current_user.cluster_id)
     print(user_list)
+    cc = pop.get_competition("Female", current_user.age, "Female Intermediate Young")
+    older = pop.clusters["Female Intermediate Young"]
+    print(cc)
 
 if __name__ == "__main__":
     main()
