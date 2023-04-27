@@ -2,6 +2,8 @@ import random
 from collections import deque
 import string
 import glob
+import time
+import time
 
 # create a class for each node 
 class EntirePopulation:
@@ -20,12 +22,19 @@ class EntirePopulation:
         for (k,v) in dfs_graph.items():
             start_dfs = k
         if gender == "Male":
+            start = time.time()
+
             comp_count = self.bfs(user_age, graph_above, start_node_bfs)
+            end = time.time()
+            print(end - start)
             return "There are {comp_count} people better".format(comp_count = comp_count)
         else:
+            start = time.time()
             comp_count = self.dfs(user_age, graph_above, start_dfs)
-       
+            end = time.time()
+            print(end - start)       
             return "There are {comp_count} people better".format(comp_count = comp_count)  
+
     
     def bfs(self, user_age, graph_above, start_node):
         sum_people = 0
@@ -69,7 +78,7 @@ class EntirePopulation:
     def add_cluster(self, cluster):
         self.clusters[cluster.cluster_id] = cluster
         
-    def generate_population(self, population_size  = 20000):
+    def generate_population(self, population_size  = 100000):
 
         for i in range(population_size):
             random_user = self.generate_random_user() 
