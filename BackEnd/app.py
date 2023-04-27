@@ -11,7 +11,6 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cluster = Cluster("Default Cluster")
 pop = EntirePopulation()
 pop.generate_population()
-user_list = []
 
 
 @app.route('/signup', methods=['POST', 'OPTIONS'])
