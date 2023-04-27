@@ -3,7 +3,7 @@ from collections import deque
 import string
 import glob
 import time
-import time
+import timeit
 
 # create a class for each node 
 class EntirePopulation:
@@ -21,19 +21,16 @@ class EntirePopulation:
         dfs_graph = self.clusters[cluster_above].graph.edges
         for (k,v) in dfs_graph.items():
             start_dfs = k
-        if gender == "Male":
-            start = time.time()
+            
+            bfs_time = timeit.timeit(lambda: self.bfs(user_age, graph_above, start_node_bfs), number=1000)
+            print("BFS execution time:", bfs_time)
+
+            dfs_time = timeit.timeit(lambda: self.dfs(user_age, graph_above, start_dfs), number=1000)
+            print("DFS execution time:", dfs_time)
 
             comp_count = self.bfs(user_age, graph_above, start_node_bfs)
-            end = time.time()
-            print(end - start)
-            return "There are {comp_count} people better".format(comp_count = comp_count)
-        else:
-            start = time.time()
-            comp_count = self.dfs(user_age, graph_above, start_dfs)
-            end = time.time()
-            print(end - start)       
-            return "There are {comp_count} people better".format(comp_count = comp_count)  
+            return "There are {comp_count} people in the cluster above with the same age as you!".format(comp_count=comp_count)
+
 
     
     def bfs(self, user_age, graph_above, start_node):
@@ -44,7 +41,6 @@ class EntirePopulation:
         while queue:
             node = queue.popleft()
             if node not in visited and node.age == user_age:
-                print("User: ", node.first_name, " age: ", node.age)
                 visited.add(node)
                 sum_people += 1
                 for neighbor in graph_above[node]:
@@ -78,7 +74,7 @@ class EntirePopulation:
     def add_cluster(self, cluster):
         self.clusters[cluster.cluster_id] = cluster
         
-    def generate_population(self, population_size  = 900):
+    def generate_population(self, population_size  = 20000):
 
         for i in range(population_size):
             random_user = self.generate_random_user() 

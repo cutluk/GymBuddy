@@ -56,9 +56,9 @@ def signup():
 @app.route('/data', methods=['GET', 'OPTIONS'])
 def get_data():
     if request.method == 'GET':
-        data = pop.get_users_from_cluster("Female Beginner Young")
+        data = pop.get_users_from_cluster("Male Beginner Young")
 
-        stats = pop.get_competition("Female", 22,"Female Intermediate Young")
+        stats = pop.get_competition("Male", 22,"Male Intermediate Young")
         response = {
             "data": data,
             "stats": stats
@@ -66,7 +66,6 @@ def get_data():
         return jsonify(response)
         
     elif request.method == 'OPTIONS':
-        print("Hello")
         resp = Response("Yep, this is options")
         resp.headers['Access-Control-Allow-Headers'] = "Authorization, Content-Type"
         resp.headers['Access-Control-Allow-Methods']= "GET, POST"
