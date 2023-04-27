@@ -32,9 +32,9 @@ def signup():
         pop.special_user = user
         
         try: 
-            pop.clusters[user.cluster_id].add_user(user)
+            # pop.clusters[user.cluster_id].add_user(user)
             current_cluster = pop.clusters[user.cluster_id]
-            pop.clusters[user.cluster_id].connect_users(current_cluster.users[-1], user)
+            # pop.clusters[user.cluster_id].connect_users(current_cluster.users[-1], user)
 
         except Exception as e:
             app.logger.error(f'Error adding user to Graph: {e}')
