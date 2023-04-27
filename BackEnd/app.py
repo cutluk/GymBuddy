@@ -57,7 +57,7 @@ def get_data():
     if request.method == 'GET':
         data = pop.get_users_from_cluster("Male Intermediate Young")
 
-        stats = pop.get_competition(pop.special_user.gender, pop.special_user.age,"Male Intermediate Young")
+        stats = pop.get_competition("Male", 22,"Male Intermediate Young")
         response = {
             "data": data,
             "stats": stats
