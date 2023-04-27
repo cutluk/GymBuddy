@@ -9,6 +9,7 @@ class EntirePopulation:
         self.clusters = {}
         self.used_emails = []
         self.used_numbers = []
+        self.special_user = None
 
     def get_competition(self, gender, user_age, cluster_above):
         start_dfs = None

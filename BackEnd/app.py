@@ -11,6 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 cluster = Cluster("Default Cluster")
 pop = EntirePopulation()
 pop.generate_population()
+user_list = []
 
 
 @app.route('/signup', methods=['POST', 'OPTIONS'])
@@ -26,11 +27,15 @@ def signup():
         age = int(data['age'])
         experience = int(data['experience'])
 
-        user = User(first_name = first_name, last_name = last_name, email = email, password = password, gender = gender, age = age, experience = experience)
-        cluster.cluster_id = user.cluster_id
-        pop.clusters[cluster.cluster_id] = cluster
+        user = User(first_name = first_name, last_name = last_name, email = email, password = password, 
+                    gender = gender, age = age, experience = experience)
+        pop.special_user = user
+        
         try: 
-            cluster.add_user(user)
+            pop.clusters[user.cluster_id].add_user(user)
+            current_cluster = pop.clusters[user.cluster_id]
+            pop.clusters[user.cluster_id].connect_users(current_cluster.users[-1], user)
+
         except Exception as e:
             app.logger.error(f'Error adding user to Graph: {e}')
         return Response("Yup, this is post", status=200, mimetype='application/json')
@@ -51,8 +56,9 @@ def signup():
 @app.route('/data', methods=['GET', 'OPTIONS'])
 def get_data():
     if request.method == 'GET':
-        data = pop.get_users_from_cluster("Female Beginner Middle Aged")
-        stats = pop.get_competition("Male", 22,"Male Intermediate Young")
+        data = pop.get_users_from_cluster(pop.special_user.cluster_id)
+
+        stats = pop.get_competition("Male", pop.special_user.age,"Male Intermediate Young")
         response = {
             "data": data,
             "stats": stats
