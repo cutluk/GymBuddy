@@ -12,6 +12,7 @@ const Signup = () => {
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
   const [exp, setExp] = useState('');
+  const [phone_number, setPhoneNumber] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -37,6 +38,7 @@ const Signup = () => {
                               age:age,
                               gender:gender,
                               experience:exp,
+                              phone_number:phone_number
                             }),
       });
 
@@ -91,6 +93,12 @@ const Signup = () => {
           placeholder="Age"
           value={age}
           onChange={(e) => setAge(e.target.value)}
+        />
+        <input className='login-input'
+          type="number"
+          placeholder='Phone Number'
+          value={phone_number}
+          onChange={(e) => setPhoneNumber(e.target.value)}
         />
         <div className="login-input">
           <label>
