@@ -21,7 +21,8 @@ class EntirePopulation:
             comp_count = self.dfs(user_age, graph_above, start_node)
             return "There are {comp_count} people better".format(comp_count = comp_count)
         
-    
+    # Breadth-First Search (BFS) algorithm 
+    # Searches the cluster above a user and returns the sum of people the same age with higher experience
     def bfs(self, user_age, graph_above, start_node):
         sum_people = 0
         visited = set()
@@ -36,7 +37,9 @@ class EntirePopulation:
                     queue.append(neighbor)
 
         return sum_people
-
+    
+    # Depth-First Search (DFS) algorithm 
+    # Searches the cluster above a user and returns the sum of people the same age with higher experience
     def dfs(self, user_age, cluster_above, start_node):
         sum_people = 0
         visited = set()
