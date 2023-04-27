@@ -74,7 +74,7 @@ class EntirePopulation:
             # so now there should be a cluster assigned to an id in the entire population
             # we should add the random user to the graph inside of their cluster
 
-    # Function to generate a random user with first and last names from predefined lists
+    # Function to generate a random user with first and last names from name text files
     def generate_random_user(self):
         with open('Female_Names.txt', 'r') as file:
             first_names_female = [line.strip() for line in file]
@@ -89,28 +89,24 @@ class EntirePopulation:
 
         gender_options = ('Female', 'Male')
 
-        # Choose a random gender
         gender = random.choice(gender_options)
 
-        # Choose a random first name based on the gender
         if gender == 'Male':
             first_name = random.choice(first_names_male)
         else:
             first_name = random.choice(first_names_female)
 
-        # Choose a random last name
         last_name = random.choice(last_names)
-
-        # Generate email, password, age, and experience
+        
+        # loop for ensuring no duplicate emails
         while True:
-            # Generate email, password, age, and experience
             email = f"{first_name[0]}{last_name}{random.randint(1, 9999)}@{random.choice(email_platforms)}"
 
-            # Check if the generated email is already used
             if email not in self.used_emails:
                 self.used_emails.append(email)
-                break  # Break out of the loop if the email is unique
-
+                break  
+        
+        # loop for ensuring no duplicate phone numbers
         while True:
             digits = [random.randint(1, 9) for _ in range(10)]
             phone_number = "{}{}{}-{}{}{}-{}{}{}{}".format(*digits)
@@ -207,7 +203,7 @@ class User:
         self.last_name = last_name
         self.phone_number = phone_number
         self.email = email
-        self.password = password #length of 8
+        self.password = password 
         self.gender = gender
         self.age = age
         self.pic_url = pic_url
