@@ -56,9 +56,9 @@ def signup():
 @app.route('/data', methods=['GET', 'OPTIONS'])
 def get_data():
     if request.method == 'GET':
-        data = pop.get_users_from_cluster("Male Beginner Young")
+        data = pop.get_users_from_cluster(pop.special_user.cluster_id)
 
-        stats = pop.get_competition("Male", 22,"Male Intermediate Young")
+        stats = pop.get_competition("Male", pop.special_user.age,"Male Intermediate Young")
         response = {
             "data": data,
             "stats": stats
