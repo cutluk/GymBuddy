@@ -25,7 +25,7 @@ def signup():
         gender = data['gender']
         age = int(data['age'])
         experience = int(data['experience'])
-        phone_number = int(data["phone_nunber"])
+        phone_number = int(data["phone_number"])
 
         user = User(first_name = first_name, last_name = last_name, email = email, password = password, 
                     gender = gender, age = age, experience = experience, phone_number= phone_number, pic_url=None)
