@@ -277,7 +277,4 @@ class User:
 
                 elif experience > 6:
                     return "Male Advanced Old"
-  
 
-
-    main()

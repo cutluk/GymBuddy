@@ -1,5 +1,5 @@
 from flask import Flask, Response, request, jsonify
-from graphforrandom import User, Cluster, EntirePopulation
+from graphDatabase import User, Cluster, EntirePopulation
 from flask_cors import CORS, cross_origin
 import json
 
