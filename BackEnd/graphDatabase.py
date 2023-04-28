@@ -42,7 +42,7 @@ class EntirePopulation:
             node = queue.popleft()
             if node not in visited and node.age == user_age:
                 visited.add(node)
-                sum_people += 1
+                sum_people += 1 # increment the users that have matching age 
                 for neighbor in graph_above[node]:
                     queue.append(neighbor)
 
@@ -100,7 +100,7 @@ class EntirePopulation:
                 self.clusters[current_cluster_id].add_user(random_user)
 
 
-    # Function to generate a random user with first and last names from name text files
+  
     def generate_random_user(self):
         with open('Female_Names.txt', 'r') as file:
             first_names_female = [line.strip() for line in file]
@@ -279,41 +279,5 @@ class User:
                     return "Male Advanced Old"
   
 
-# function for logging in 
-def initialize_app(population_size = 200):
-    
-    print("Hello! Welcome to Gym Buddy!")
-    print("Please enter your information below and we will get you started...\n")
-    first_name = input("First Name: ")
-    last_name = input("Last Name: ")
-    email = input("Email Address: ")
-    phone_number = input("Phone Number: ")
-    password = input("Password: ")
-    gender = input("Gender (Male / Female): ")
-    age = int(input("Age: "))
-    experience = int(input("Workout experience (1 - 10): "))
-    newest_user = User(first_name= first_name, last_name= last_name, email= email, password=password,
-                       gender= gender, phone_number = phone_number, age= age, experience= experience)
-    
-    print("Congrats {name}! You are ready to meet other users!".format(name = newest_user.first_name))
-    return newest_user
 
-
-def main():
-    pop = EntirePopulation()
-    pop.generate_population()
-    
-    current_user = initialize_app()
-    #add current user to the population 
-    current_cluster = pop.clusters[current_user.cluster_id]
-    current_cluster.add_user(current_user)
-    current_cluster.connect_users(current_cluster.users[-1], current_user)
-
-    user_list =  pop.get_users_from_cluster(cluster_id= current_user.cluster_id)
-    print(user_list)
-    cc = pop.get_competition("Female", current_user.age, "Female Intermediate Young")
-    older = pop.clusters["Female Intermediate Young"]
-    print(cc)
-
-if __name__ == "__main__":
     main()
